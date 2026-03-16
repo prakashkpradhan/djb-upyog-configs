@@ -68,6 +68,13 @@ serviceMaps:
             - jsonPath: $.vehicle.auditDetails.createdTime
             - jsonPath: $.vehicle.auditDetails.lastModifiedTime
             - jsonPath: $.vehicle.id
+        
+        - query:  INSERT INTO eg_vehicle_driver_mapping(vehicle_id, driver_id, status) VALUES( ?, ?, ?);
+          basePath: vehicle
+          jsonMaps:
+            - jsonPath: $.vehicle.id
+            - jsonPath: $.vehicle.driverData.id
+            - jsonPath: $.vehicle.driverData.status
 
     - version: 1.0
       description: Vehicle Trip details in eg_vehicle_log  table
