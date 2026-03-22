@@ -417,7 +417,7 @@ serviceMaps:
 
 
 
-            
+     
 
     - version: 1.0
       description: Persists filling point details
@@ -445,10 +445,10 @@ serviceMaps:
             - jsonPath: $.fillingPoint.createdTime
             - jsonPath: $.fillingPoint.lastModifiedTime
 
-        - query: INSERT INTO public.upyog_rs_water_tanker_address_details(filling_point_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode, latitude, longitude, type) VALUES (?::uuid, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO public.upyog_rs_water_tanker_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode, latitude, longitude, type) VALUES (?::uuid, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: fillingPoint
           jsonMaps:
-            - jsonPath: $.fillingPoint.address.fillingPointId
+            - jsonPath: $.fillingPoint.address.addressId
             - jsonPath: $.fillingPoint.id
             - jsonPath: $.fillingPoint.address.houseNo
             - jsonPath: $.fillingPoint.address.addressLine1
@@ -463,3 +463,6 @@ serviceMaps:
             - jsonPath: $.fillingPoint.address.latitude
             - jsonPath: $.fillingPoint.address.longitude
             - jsonPath: $.fillingPoint.address.type
+
+
+            
