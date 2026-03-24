@@ -499,7 +499,7 @@ serviceMaps:
           jsonMaps:
             - jsonPath: $.fixedPointDetailsList.*.system_assigned_schedule_id
             - jsonPath: $.fixedPointDetailsList.*.fixed_point_code
-            - jsonPath: $.fixedPointDetailsList.*.day
+            - jsonPath: $.fixedPointDetailsList.*.day_value
             - jsonPath: $.fixedPointDetailsList.*.trip_no
             - jsonPath: $.fixedPointDetailsList.*.arrival_time_to_fpl
             - jsonPath: $.fixedPointDetailsList.*.departure_time_from_fpl
