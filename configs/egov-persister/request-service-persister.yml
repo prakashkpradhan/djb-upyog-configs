@@ -173,7 +173,7 @@ serviceMaps:
       fromTopic: create-fixed-point-water-tanker-booking
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO public.upyog_rs_water_tanker_applicant_details(applicant_id, booking_id, name, mobile_number, email_id, alternate_number, createdby, lastModifiedby, createdtime, lastmodifiedtime,type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO public.upyog_rs_water_tanker_applicant_details(applicant_id, booking_id, name, mobile_number, email_id, alternate_number, createdby, lastModifiedby, createdtime, lastmodifiedtime,type,fixed_point_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: waterTankerBookingDetail.applicantDetail
           jsonMaps:
             - jsonPath: $.waterTankerBookingDetail.applicantDetail.applicantId
@@ -187,6 +187,7 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.auditDetails.createdTime
             - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedTime
             - jsonPath: $.waterTankerBookingDetail.applicantDetail.type
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.fixedPointId
 
         - query: INSERT INTO public.upyog_rs_water_tanker_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode,latitude,longitude, type, ward, zone, constituency) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?, ?, ?, ?, ?);
           basePath: waterTankerBookingDetail.address
