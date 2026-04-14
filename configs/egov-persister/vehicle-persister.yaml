@@ -43,7 +43,7 @@ serviceMaps:
           jsonMaps:
             - jsonPath: $.vehicle.id
             
-        - query : UPDATE eg_vehicle SET tenantId=?, registrationNumber=?, model=?, type=?, tankCapicity=?, suctionType=?, pollutionCertiValidTill=?, InsuranceCertValidTill=?, fitnessValidTill=?, roadTaxPaidTill=?, gpsEnabled=?, source=?, status=?, additionalDetails=?, owner_id =?, createdBy=?, lastModifiedBy=?, createdTime=?, lastModifiedTime=?, filling_point_id=? WHERE id=?
+        - query : UPDATE eg_vehicle SET tenantId=?, registrationNumber=?, model=?, type=?, tankCapicity=?, suctionType=?, pollutionCertiValidTill=?, InsuranceCertValidTill=?, fitnessValidTill=?, roadTaxPaidTill=?, gpsEnabled=?, source=?, status=?, additionalDetails=?, owner_id =?, createdBy=?, lastModifiedBy=?, createdTime=?, lastModifiedTime=? WHERE id=?
           basePath: vehicle
           jsonMaps:
             - jsonPath: $.vehicle.tenantId
@@ -67,24 +67,9 @@ serviceMaps:
             - jsonPath: $.vehicle.auditDetails.lastModifiedBy
             - jsonPath: $.vehicle.auditDetails.createdTime
             - jsonPath: $.vehicle.auditDetails.lastModifiedTime
-            - jsonPath: $.vehicle.fillingPoint.fillingStationId
             - jsonPath: $.vehicle.id
         
-        - query: UPDATE eg_vehicle_driver_mapping SET status='INACTIVE'
-                WHERE vehicle_id=? AND status='ACTIVE'
-          basePath: vehicle
-          jsonMaps:
-            - jsonPath: $.vehicle.id
-
-        - query: INSERT INTO eg_vehicle_driver_mapping(vehicle_id, driver_id, status)
-                VALUES(?, ?, ?)
-                ON CONFLICT (vehicle_id, driver_id)
-                DO UPDATE SET status = EXCLUDED.status;
-          basePath: vehicle
-          jsonMaps:
-            - jsonPath: $.vehicle.id
-            - jsonPath: $.vehicle.driverData.id
-            - jsonPath: $.vehicle.driverData.status
+       
 
     - version: 1.0
       description: Vehicle Trip details in eg_vehicle_log  table
