@@ -48,7 +48,35 @@ serviceMaps:
       fromTopic: create-water-tanker-booking
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO public.upyog_rs_water_tanker_booking_details(booking_id, booking_no, tenant_id, address_detail_id, mobile_number, tanker_type, water_type, tanker_quantity, water_quantity, description, applicant_uuid, delivery_date, delivery_time, extra_charge, vendor_id, vehicle_id, driver_id, vehicle_type, vehicle_capacity, booking_createdby, booking_status, locality_code,wt_file_store_id, createdby, lastModifiedby, createdtime, lastmodifiedtime,applicant_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?::DATE, ?::TIME, ?, ?, ?, ?, ?, ?, LEFT(?,64), ?, ?, ?, ?, ?, ?,?,?);
+        - query: INSERT INTO public.upyog_rs_water_tanker_booking_details(booking_id, booking_no, tenant_id, address_detail_id, mobile_number, tanker_type, water_type, tanker_quantity, water_quantity, description, applicant_uuid, delivery_date, delivery_time, extra_charge, vendor_id, vehicle_id, driver_id, vehicle_type, vehicle_capacity, booking_createdby, booking_status, locality_code,wt_file_store_id, createdby, lastModifiedby, createdtime, lastmodifiedtime,applicant_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?::DATE, ?::TIME, ?, ?, ?, ?, ?, ?, LEFT(?,64), ?, ?, ?, ?, ?, ?,?,?)
+                 ON CONFLICT (booking_id)
+                 DO UPDATE SET
+                 booking_no = EXCLUDED.booking_no,
+                 tenant_id = EXCLUDED.tenant_id,
+                address_detail_id = EXCLUDED.address_detail_id,
+                 mobile_number = EXCLUDED.mobile_number,
+                  tanker_type = EXCLUDED.tanker_type,
+                  water_type = EXCLUDED.water_type,
+                 tanker_quantity = EXCLUDED.tanker_quantity,
+                 water_quantity = EXCLUDED.water_quantity,
+                 description = EXCLUDED.description,
+                applicant_uuid = EXCLUDED.applicant_uuid,
+                delivery_date = EXCLUDED.delivery_date,
+                delivery_time = EXCLUDED.delivery_time,
+                extra_charge = EXCLUDED.extra_charge,
+                vendor_id = EXCLUDED.vendor_id,
+                vehicle_id = EXCLUDED.vehicle_id,
+                driver_id = EXCLUDED.driver_id,
+                vehicle_type = EXCLUDED.vehicle_type,
+               vehicle_capacity = EXCLUDED.vehicle_capacity,
+               booking_createdby = EXCLUDED.booking_createdby,
+               booking_status = EXCLUDED.booking_status,
+               locality_code = EXCLUDED.locality_code,
+               wt_file_store_id = EXCLUDED.wt_file_store_id,
+               lastModifiedby = EXCLUDED.lastModifiedby,
+               lastmodifiedtime = EXCLUDED.lastmodifiedtime,
+               applicant_id = EXCLUDED.applicant_id;
+
           basePath: waterTankerBookingDetail
           jsonMaps:
             - jsonPath: $.waterTankerBookingDetail.bookingId
