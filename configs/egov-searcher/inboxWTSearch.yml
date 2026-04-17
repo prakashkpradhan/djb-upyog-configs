@@ -35,14 +35,14 @@ SearchDefinitions:
           - name: pi.businessservice
             isMandatory: false
             jsonPath: $.searchCriteria.businessservice
-          - name: urstbd.createdtime
-            isMandatory: false
-            jsonPath: $.searchCriteria.fromDate
-            operator: ">="
-          - name: urstbd.createdtime
-            isMandatory: false
-            jsonPath: $.searchCriteria.toDate
-            operator: "<="
+#          - name: urstbd.createdtime
+#            isMandatory: false
+#            jsonPath: $.searchCriteria.fromDate
+#            operator: ">="
+#          - name: urstbd.createdtime
+#            isMandatory: false
+#            jsonPath: $.searchCriteria.toDate
+#            operator: "<="
         pagination:
           noOfRecords: $.searchCriteria.noOfRecords
           offset: $.searchCriteria.offset
@@ -83,14 +83,14 @@ SearchDefinitions:
           - name: pi.businessservice
             isMandatory: false
             jsonPath: $.searchCriteria.businessservice
-          - name: urstbd.createdtime
-            isMandatory: false
-            jsonPath: $.searchCriteria.fromDate
-            operator: ">="
-          - name: urstbd.createdtime
-            isMandatory: false
-            jsonPath: $.searchCriteria.toDate
-            operator: "<="
+#          - name: urstbd.createdtime
+#            isMandatory: false
+#            jsonPath: $.searchCriteria.fromDate
+#            operator: ">="
+#          - name: urstbd.createdtime
+#            isMandatory: false
+#            jsonPath: $.searchCriteria.toDate
+#            operator: "<="
         pagination:
           noOfRecords: $.searchCriteria.noOfRecords
           offset: $.searchCriteria.offset
