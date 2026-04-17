@@ -759,3 +759,84 @@ serviceMaps:
             - jsonPath: $.mappings.*.auditDetails.lastModifiedBy
             - jsonPath: $.mappings.*.auditDetails.createdTime
             - jsonPath: $.mappings.*.auditDetails.lastModifiedTime
+
+
+
+    - version: 1.0.0
+      description: Persists Trip History and Route Points into PostgreSQL
+      fromTopic: save-trip-history-topic
+      isTransactional: true
+      queryMaps:
+        - query: >
+            INSERT INTO eg_trip_history (tenantid, tripid, driverid, vehicleid, bookingno, starttime, endtime, totaldistancemeters, businessservice, status, additionaldetails, createdby, lastmodifiedby, createdtime, lastmodifiedtime)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT (tripid) DO UPDATE SET lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime, status = EXCLUDED.status, endtime = EXCLUDED.endtime, totaldistancemeters = EXCLUDED.totaldistancemeters;
+          basePath: TripHistory.*
+          jsonMaps:
+            - jsonPath: $.TripHistory.*.tenantId
+              type: STRING
+            - jsonPath: $.TripHistory.*.tripId
+              type: STRING
+            - jsonPath: $.TripHistory.*.driverId
+              type: STRING
+            - jsonPath: $.TripHistory.*.vehicleId
+              type: STRING
+            - jsonPath: $.TripHistory.*.bookingNo
+              type: STRING
+            - jsonPath: $.TripHistory.*.startTime
+              type: LONG
+            - jsonPath: $.TripHistory.*.endTime
+              type: LONG
+            - jsonPath: $.TripHistory.*.totalDistanceMeters
+              type: DOUBLE
+            - jsonPath: $.TripHistory.*.businessService
+              type: STRING
+            - jsonPath: $.TripHistory.*.status
+              type: STRING
+            - jsonPath: $.TripHistory.*.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.TripHistory.*.auditDetails.createdBy
+              type: STRING
+            - jsonPath: $.TripHistory.*.auditDetails.lastModifiedBy
+              type: STRING
+            - jsonPath: $.TripHistory.*.auditDetails.createdTime
+              type: LONG
+            - jsonPath: $.TripHistory.*.auditDetails.lastModifiedTime
+              type: LONG
+
+        - query: >
+            INSERT INTO eg_trip_route_points (pointid, tripid, lat, lng, rawlat, rawlng, accuracy, speed, bearing, provider, timestamp, epochmillis, isprecise)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: TripHistory.*.routePoints.*
+          jsonMaps:
+            - jsonPath: $.TripHistory.*.routePoints.*.pointId
+              type: STRING
+            - jsonPath: $.TripHistory.*.routePoints.*.tripId
+              type: STRING
+            - jsonPath: $.TripHistory.*.routePoints.*.lat
+              type: DOUBLE
+            - jsonPath: $.TripHistory.*.routePoints.*.lng
+              type: DOUBLE
+            - jsonPath: $.TripHistory.*.routePoints.*.rawLat
+              type: DOUBLE
+            - jsonPath: $.TripHistory.*.routePoints.*.rawLng
+              type: DOUBLE
+            - jsonPath: $.TripHistory.*.routePoints.*.accuracy
+              type: DOUBLE
+            - jsonPath: $.TripHistory.*.routePoints.*.speed
+              type: DOUBLE
+            - jsonPath: $.TripHistory.*.routePoints.*.bearing
+              type: DOUBLE
+            - jsonPath: $.TripHistory.*.routePoints.*.provider
+              type: STRING
+            - jsonPath: $.TripHistory.*.routePoints.*.timestamp
+              type: STRING
+            - jsonPath: $.TripHistory.*.routePoints.*.epochMillis
+              type: LONG
+            - jsonPath: $.TripHistory.*.routePoints.*.isPrecise
+              type: BOOLEAN
+
+
+
+              
