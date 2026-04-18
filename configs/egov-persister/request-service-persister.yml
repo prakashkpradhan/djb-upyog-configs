@@ -739,16 +739,22 @@ serviceMaps:
 
 
     - version: 1.0
-      description: Persister config for filling point vendor mapping
+      description: Sync filling point vendor mapping (Delete-then-Insert)
       fromTopic: save-filling-point-vendor-mapping
       isTransaction: true
       queryMaps:
+        - query: >
+            DELETE FROM eg_wt_fillingpoint_vendor_map 
+            WHERE vendor_id = CAST(? AS UUID) AND tenant_id = ?;
+          basePath: $.mappings.*
+          jsonMaps:
+            - jsonPath: $.mappings.*.vendorId
+            - jsonPath: $.mappings.*.tenantId
 
         - query: >
             INSERT INTO eg_wt_fillingpoint_vendor_map
             (id, tenant_id, filling_point_id, vendor_id, createdby, lastmodifiedby, createdtime, lastmodifiedtime)
             VALUES (CAST(? AS UUID), ?, CAST(? AS UUID), CAST(? AS UUID), ?, ?, ?, ?);
-
           basePath: $.mappings.*
           jsonMaps:
             - jsonPath: $.mappings.*.id
@@ -759,8 +765,6 @@ serviceMaps:
             - jsonPath: $.mappings.*.auditDetails.lastModifiedBy
             - jsonPath: $.mappings.*.auditDetails.createdTime
             - jsonPath: $.mappings.*.auditDetails.lastModifiedTime
-
-
 
     - version: 1.0.0
       description: Persists Trip History and Route Points into PostgreSQL
