@@ -72,6 +72,16 @@ SearchDefinitions:
             jsonPath: $.searchCriteria.offset
 
 
+
+          - name: assignee
+            isMandatory: false
+            jsonPath: $.searchCriteria.assignee
+
+          - name: businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
+
+
       output:
         jsonFormat: {"ResponseInfo": {},"waterTankerBookingDetail": []}
         outJsonPath: $.waterTankerBookingDetail
@@ -143,6 +153,14 @@ SearchDefinitions:
           - name: offset
             isMandatory: false
             jsonPath: $.searchCriteria.offset
+
+          - name: assignee
+            isMandatory: false
+            jsonPath: $.searchCriteria.assignee
+
+          - name: businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
 
 
 
